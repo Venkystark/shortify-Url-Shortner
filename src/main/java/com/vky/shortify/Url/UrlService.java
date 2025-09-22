@@ -1,11 +1,8 @@
 package com.vky.shortify.Url;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import com.vky.shortify.util.Base62Encoder;
 
 @Service
@@ -45,14 +42,27 @@ public class UrlService {
         return Base62Encoder.encode(res.getId());
     }
 
-    public String getLongUrl(String shortcode) {
+    @Cacheable(value = "urls", key = "#shortcode")
+    public Url getLongUrl(String shortcode) {
+
+        Url url = null;
+
+        try{
+
+        System.out.println("fetching from db" +shortcode);
 
         Long id = Base62Encoder.decode(shortcode);
 
-        Url url = urlRepository.findById(id)
+        url = urlRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("URL not found for shortcode: " + shortcode));
 
-        return url.getLongUrl();
+        }
+        catch(Exception e) {
+
+            e.printStackTrace();
+        }
+
+        return url;
 
     }
 }
