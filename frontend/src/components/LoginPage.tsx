@@ -59,14 +59,14 @@ export function LoginPage({ onNavigate }: LoginPageProps) {
           <p className="text-muted-foreground">Sign in to your Shortify account</p>
         </div>
 
-        {/* Demo Credentials Info */}
+        {/* Demo Credentials Info
         <Card className="bg-muted/50 border-dashed">
           <CardContent className="p-4">
             <p className="text-sm text-muted-foreground mb-2">Demo credentials:</p>
             <p className="text-sm">Email: demo@shortify.com</p>
             <p className="text-sm">Password: password</p>
           </CardContent>
-        </Card>
+        </Card> */}
 
         {/* Login Form */}
         <Card>
