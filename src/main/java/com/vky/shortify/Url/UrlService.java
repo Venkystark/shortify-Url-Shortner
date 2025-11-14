@@ -26,7 +26,9 @@ public class UrlService {
 
         System.out.println(url.getId()+"id found");
 
-        return Base62Encoder.encode(url.getId());
+        // return Base62Encoder.encode(url.getId());
+        return url.getShortCode();
+
     }
 
     public String saveUrl(Url url) {
@@ -39,7 +41,13 @@ public class UrlService {
 
         Url res = urlRepository.save(url);
 
-        return Base62Encoder.encode(res.getId());
+        String shortCode = Base62Encoder.encode(res.getId());
+
+        res.setShortCode(shortCode);
+
+        urlRepository.save(res);
+
+        return shortCode;
     }
 
     @Cacheable(value = "urls", key = "#shortcode")

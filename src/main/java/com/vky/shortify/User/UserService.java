@@ -55,5 +55,10 @@ public class UserService implements UserDetailsService {
         return authentication.isAuthenticated();
 
     }
+
+    public UserEntity findByUsername(String string) {
+
+        return userRepository.findByUsername(string);
+    }
     
 }
