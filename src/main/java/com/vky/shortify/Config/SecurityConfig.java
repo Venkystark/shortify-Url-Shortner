@@ -52,7 +52,11 @@ public class SecurityConfig {
     @Bean
 public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(List.of("http://localhost:3000")); // your React dev URL
+    // configuration.setAllowedOrigins(List.of("http://localhost:3000","https://shortify-url-shortner-1nrj.onrender.com/")); // your React dev URL
+    configuration.setAllowedOriginPatterns(List.of(
+            "http://localhost:3000",
+            "https://*.onrender.com"
+    ));
     configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
     configuration.setAllowedHeaders(List.of("*"));
     configuration.setAllowCredentials(true); // allow cookies or Authorization headers if needed
